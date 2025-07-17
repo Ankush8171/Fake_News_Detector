@@ -1,0 +1,156 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="scroll">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %} Fake News {% endblock %}</title>
+
+   <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+  
+  <link rel="stylesheet" href="{% static 'css/content.css' %}">
+
+  <script src="https://cdn.tailwindcss.com"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+   integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+</head>
+
+<body class="bg-gray-100 overflow-y: auto;">
+   
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white shadow">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+
+        <!-- Mobile menu button -->
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-none focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex shrink-0 items-center">
+            <img class="h-10 w-auto x" src="{% static 'images/clarify.jpg' %}" alt="Your Company" />
+          </div>
+
+          <div class="hidden sm:flex flex-1 justify-center space-x-10 ">
+            
+              <a href="{% url 'home' %}" class="text-blue-700 border-b-2 border-blue-700 pb-[0.2px] mt-2 font-medium">Home</a>
+              
+              <a href="#" class="text-gray-700 font-medium border-b-2 border-transparent hover:text-blue-500 hover:border-b-blue-700 mt-2  transition">About</a>
+             <a href="{% url 'contact' %}" class="text-gray-700 font-medium border-b-2 border-transparent hover:text-blue-500 hover:border-b-blue-700 mt-2  transition">Contact</a>
+              <a href="#" class="text-gray-700 font-medium border-b-2 border-transparent hover:text-blue-500 hover:border-b-blue-700 mt-2 transition">Team</a>
+              
+ 
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+
+      <button id="modeToggle" class="text-xl text-gray-700 dark:text-yellow-300 hover:scale-110 transition duration-300 focus:outline-none">
+        <i id="modeIcon"  height=10px width=10px class="fas fa-moon " ></i>
+      </button>
+
+
+
+
+
+        <!-- Profile dropdown button and menu -->
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none">
+            <span class="sr-only">View notifications</span>
+
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+          </button>
+
+          <div class="relative ml-3">
+            <button id="profile-button" type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800">
+              <span class="sr-only">Open user menu</span>
+              <img class="h-8 w-8 rounded-full" src="{% static 'images/user.png' %}" alt="user-image" />
+            </button>
+
+            <!-- Dropdown menu -->
+            <div id="dropdown-menu" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5" role="menu">
+              <a href="{% url 'profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300" role="menuitem">Your Profile</a>
+              <a href="{% url 'settings'%}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300" role="menuitem">Settings</a>
+              <a href="{% url 'home' %}" class="block px-4 py-2 text-sm text-gray-700  hover:bg-gray-300" role="menuitem">Sign out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="sm:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pt-2 pb-3">
+        <a href="{% url 'home' %}" class="text-blue-700 border-b-2 border-blue-700 font-medium">Home</a>
+              <a href="#" class="text-gray-700 font-medium border-b-2 border-transparent hover:text-blue-500 hover:border-b-blue-700 transition">About</a>
+             <a href="{% url 'contact' %}" class="text-gray-700 font-medium border-b-2 border-transparent hover:text-blue-500 hover:border-b-blue-700 transition">Contact</a>
+              <a href="#" class="text-gray-700 font-medium border-b-2 border-transparent hover:text-blue-500 hover:border-b-blue-700 transition">Team</a>
+              
+      </div>
+    </div>
+  </nav>
+
+
+  <script>
+    // Toggle profile dropdown
+    const profileBtn = document.getElementById("profile-button");
+    const dropdownMenu = document.getElementById("dropdown-menu");
+
+    profileBtn.addEventListener("click", () => {
+      dropdownMenu.classList.toggle("hidden");
+    });
+
+    // Optional: Close dropdown when clicking outside
+    document.addEventListener("click", (event) => {
+      if (!profileBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.add("hidden");
+      }
+    });
+
+
+    
+  document.addEventListener("DOMContentLoaded", function () {
+    const html = document.documentElement;
+    const modeToggle = document.getElementById("modeToggle");
+    const modeIcon = document.getElementById("modeIcon");
+
+    const savedTheme = localStorage.getItem("theme");
+    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+      html.classList.add("dark");
+      modeIcon.classList.remove("fa-moon");
+      modeIcon.classList.add("fa-sun");
+    } else {
+      html.classList.remove("dark");
+      modeIcon.classList.remove("fa-sun");
+      modeIcon.classList.add("fa-moon");
+    }
+
+    modeToggle.addEventListener("click", () => {
+      const isDark = html.classList.toggle("dark");
+      modeIcon.classList.toggle("fa-moon", !isDark);
+      modeIcon.classList.toggle("fa-sun", isDark);
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+  });
+
+
+
+     
+
+
+  </script>
+
+</body>
+</html>

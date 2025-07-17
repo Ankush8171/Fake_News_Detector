@@ -1,0 +1,61 @@
+
+{% include 'navbar.html' %}
+ 
+<section class="min-h-screen bg-white py-16 px-4">
+  <div class="max-w-4xl mx-auto text-center mb-12">
+    <h2 class="text-4xl font-extrabold text-gray-800 mb-4">Get in Touch</h2>
+    <p class="text-gray-600 max-w-xl mx-auto">We'd love to hear from you. Fill out the form below and we’ll get back to you as soon as possible.</p>
+  </div>
+
+  <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8 md:p-10 space-y-6 border border-gray-200">
+    <form method="POST" action="{% url 'contact' %}" class="space-y-6">
+      {% csrf_token %}
+
+      <!-- Name Input -->
+      <div class="relative">
+        <label for="name" class="block text-sm font-medium mb-1 text-gray-700">Your Name</label>
+        <div class="relative">
+          <input type="text" name="name" id="name" required placeholder="John Doe"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3 pl-11 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path d="M5.121 17.804A6.967 6.967 0 0112 15c1.879 0 3.58.73 4.879 1.925M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Email Input -->
+      <div class="relative">
+        <label for="email" class="block text-sm font-medium mb-1 text-gray-700">Email</label>
+        <div class="relative">
+          <input type="email" name="email" id="email" required placeholder="you@example.com"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3 pl-11 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path d="M16 12l-4-4-4 4m8 4H8"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message Textarea -->
+      <div>
+        <label for="message" class="block text-sm font-medium mb-1 text-gray-700">Message</label>
+        <textarea name="message" id="message" rows="5" required placeholder="Write your message here..."
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 transition duration-200 text-white font-semibold py-3 rounded-lg shadow-md flex items-center justify-center gap-2">
+        Send Message
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 13.5L4 10l16-6-6 16-3.5-6.5z" />
+        </svg>
+      </button>
+    </form>
+  </div>
+</section>

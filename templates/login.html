@@ -1,0 +1,51 @@
+{% include 'navbar.html' %}
+
+<main class="flex-grow flex items-center justify-center mt-24 px-4">
+  <div
+    class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm border-2 border-blue-600"
+  >
+    <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Login</h1>
+    <form method="POST" action="#" class="space-y-4">
+      {% csrf_token %}
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Email</label>
+        <input
+          type="email"
+          name="email"
+          required
+          class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Password</label>
+        <input
+          type="password"
+          name="password"
+          required
+          class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div class="flex items-center justify-between text-sm text-gray-600">
+        <label class="flex items-center">
+          <input type="checkbox" class="mr-1" />
+          Remember me
+        </label>
+        <a href="#" class="text-blue-600 hover:underline">Forgot password?</a>
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition duration-200"
+      >
+        Login
+      </button>
+    </form>
+    <p class="text-sm text-center text-gray-600 mt-4">
+      Don’t have an account?
+      <a href="{% url 'signup' %}" class="text-blue-600 hover:underline"
+        >Signup</a
+      >
+    </p>
+  </div>
+</main>
+
+{% include "footer.html" %}

@@ -1,0 +1,124 @@
+{% load static %} 
+
+
+  <section class="bg-dark-100 dark:bg-white-900 dark:text-black">
+    <!-- Main Content -->
+    <section class="pt-20 px-4 max-w-7xl mx-auto">
+      <!-- HERO -->
+
+      <header class="mt-6">
+        <div
+          class="rounded-md bg-gradient-to-br from-sky-800 via-slate-700/70 to-gray-900 p-10 text-white"
+          id="heading"
+        >
+          <h1
+            class="text-2xl md:text-3xl font-extrabold max-w-sm md:max-w-lg leading-tight whitespace-nowrap animate-slide"
+          >
+            Fight
+            <span class="text-gray-900">Fake News</span> with Just One Click
+          </h1>
+
+          <p class="mt-4 max-w-md text-gray-200">
+            Verify the authenticity of news articles with our advanced detection
+            technology. Stay informed, stay confident.
+          </p>
+
+          <button
+            class="special-button font-semibold"
+            onclick="window.location.href = '{% url 'signup' %}'"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Get Started
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- FEATURES -->
+      <main id="features " class="mt-14 autoShow">
+        <h2 class="text-2xl md:text-3xl font-bold">Key Features</h2>
+        <p class="mt-2 max-w-lg">
+          Explore the powerful tools that make TruthGuard your go-to source for
+          reliable information.
+        </p>
+
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+          <!-- Card 1 -->
+          <div
+            class="p-5 border rounded-md shadow-sm hover:shadow-md transition led-border bg-white dark:bg-white-900"
+          >
+            <span class="text-2xl"><i class="fa-solid fa-user-check"></i></span>
+            <h3 class="font-semibold mt-2">Real-Time Verification</h3>
+            <p class="text-sm text-gray-600">
+              Instantly assess the credibility of any news article with
+              cutting-edge detection.
+            </p>
+          </div>
+          <!-- Card 2 -->
+          <div
+            class="p-5 border rounded-md shadow-sm hover:shadow-md transition led-border bg-white dark:bg-white-900"
+          >
+            <span class="text-2xl"><i class="fas fa-search"></i></span>
+            <h3 class="font-semibold mt-2">Deep Analysis</h3>
+            <p class="text-sm text-gray-600">
+              Go beyond surface checks with in-depth analysis of sources,
+              claims, and context.
+            </p>
+          </div>
+          <!-- Card 3 -->
+          <div
+            class="p-5 border rounded-md shadow-sm hover:shadow-md transition led-border bg-white dark:bg-white-900"
+          >
+            <span class="text-2xl"><i class="fas fa-history"></i></span>
+            <h3 class="font-semibold mt-2">Historical Data</h3>
+            <p class="text-sm text-gray-600">
+              Access archives of verified articles to track news story
+              evolution.
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <!-- CTA -->
+      <section class="mt-20 text-center">
+        <h2 class="text-2xl md:text-3xl font-extrabold">
+          Ready to Experience the Truth?
+        </h2>
+        <p class="mt-3 max-w-xl mx-auto">
+          Join thousands who rely on TruthGuard to navigate online news
+          confidently.
+        </p>
+
+        <button
+          class="h-10 w-20 mt-6 bg-blue-500 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 rounded text-white font-semibold text-sm shadow"
+          onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+        >
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+
+      </section>
+      </section>
+
+    
+      
+
+    </section>
+
+    <script>
+      // Profile Dropdown
+      const profileBtn = document.getElementById("profile-button");
+      const dropdownMenu = document.getElementById("dropdown-menu");
+      profileBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("hidden");
+      });
+      document.addEventListener("click", (e) => {
+        if (!dropdownMenu.contains(e.target)) {
+          dropdownMenu.classList.add("hidden");
+        }
+      });
+    </script>
+  

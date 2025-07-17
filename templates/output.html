@@ -1,0 +1,171 @@
+{% load static %}
+
+{% include "navbar.html" %}
+
+<section class="bg-white-300 text-black mt-24 space-y-3">
+  
+
+  <div class="flex justify-center">
+    <h1
+      class="text-3xl md:text-4xl font-extrabold flex items-center gap-2 text-center"
+    >
+      <img src="{% static 'images/ai.gif' %}" alt="AI" class="w-20 h-20" />
+      AI-powered insights for news you can trust   
+    </h1>
+  </div>
+  <p class="text-gray-700 mt-0 text-center bg-white-100">
+    Enter a news article, upload an image, or use voice to analyze.
+  </p>
+
+  <!-- Main Form -->
+  <main class="max-w-4xl mx-auto p-6 rounded-lg shadow-lg space-y-3">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <!-- Prompt Box -->
+      <label class="block text-lg font-semibold mb-2">Enter News Content</label>
+      <div class="relative">
+        <textarea
+          id="news-text"
+          name="text"
+          rows="5"
+          required
+          class="w-full rounded border border-gray-300 bg-gray-50 p-4 pr-24 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Paste or type your news content here..."
+        >
+The government announced a new policy today..</textarea
+        >
+
+        <!-- Icons inside prompt box -->
+        <div class="absolute top-2 right-2 flex space-x-2">
+          <!-- Image Icon -->
+          <label for="image-upload" title="Upload Image">
+            <i class="fa-solid fa-images"></i>
+          </label>
+
+          <input
+            id="image-upload"
+            name="image"
+            type="file"
+            accept="image/*"
+            class="hidden"
+          />
+
+          <!-- Voice Icon -->
+          <button
+            type="button"
+            title="Start Voice Input"
+            id="voice-btn">
+          
+            <i class="fa-solid fa-microphone"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- URL Input Field -->
+      <div class="mt-6">
+        <label class="block text-lg font-semibold mb-1" for="url-input"
+          >URL here (optional)</label
+        >
+        <input
+          name="url"
+          id="url-input"
+          type="url"
+          placeholder="Paste the news article URL"
+          class="w-full rounded border border-gray-300 bg-gray-50 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="mt-6 w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition"
+      >
+        Analyze News
+      </button>
+    </form>
+  </main>
+
+  <!-- Static Preview Result Section -->
+  <section
+    class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg space-y-6"
+  >
+    <h2 class="text-2xl font-bold mb-4">Analysis Result</h2>
+
+    <!-- Analysis Result -->
+    <div>
+      <h3 class="text-lg font-semibold">Result:</h3>
+      <p class="mt-1 text-black">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        This news appears to be
+        <strong class="text-red-500">potentially fake</strong>. Please verify
+        from reliable sources.
+      </p>
+    </div>
+
+    <!-- Key Findings -->
+    <div>
+      <h3 class="text-lg font-semibold">Key Findings:</h3>
+      <ul class="list-disc list-inside text-black mt-1 space-y-1">
+        <li>Multiple claims lack citation from reputable sources.</li>
+        <li>Language is emotionally charged and lacks objectivity.</li>
+        <li>The domain is not recognized as a verified news provider.</li>
+      </ul>
+    </div>
+
+    <!-- Recommendations -->
+    <div>
+      <h3 class="text-lg font-semibold">Recommendations:</h3>
+      <ul class="list-disc list-inside text-gray-800 mt-1 space-y-1">
+        <li>Check the story on official government or media websites.</li>
+        <li>
+          Look for fact-checks from trusted organizations (e.g., AltNews, BOOM).
+        </li>
+        <li>Avoid sharing until the story is verified.</li>
+      </ul>
+    </div>
+  </section>
+</section>
+
+
+
+
+
+<!-- Voice Recognition Script -->
+  
+<script>
+  const voiceBtn = document.getElementById('voice-btn');
+  const textArea = document.getElementById('news-text');
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    voiceBtn.addEventListener('click', () => {
+      recognition.start();
+      voiceBtn.innerHTML = '<i class="fa-solid fa-microphone-lines"></i>'; // indicate recording
+    });
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      textArea.value += (textArea.value ? ' ' : '') + transcript;
+      voiceBtn.innerHTML = '<i class="fa-solid fa-microphone"></i>';
+    };
+
+    recognition.onend = () => {
+      voiceBtn.innerHTML = '<i class="fa-solid fa-microphone"></i>';
+    };
+
+    recognition.onerror = (event) => {
+      alert('Voice recognition error: ' + event.error);
+      voiceBtn.innerHTML = '<i class="fa-solid fa-microphone"></i>';
+    };
+  } else {
+    voiceBtn.disabled = true;
+    voiceBtn.title = "Speech Recognition not supported in this browser";
+  }
+</script>
